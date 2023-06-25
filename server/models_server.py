@@ -210,14 +210,14 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="image-classification", model=f"{local_fold}/microsoft/beit-base-patch16-224-pt22k-ft22k"), 
             #     "device": device
             # },
-            "facebook/detr-resnet-50-panoptic": {
-                "model": pipeline(task="image-segmentation", model=f"{local_fold}/facebook/detr-resnet-50-panoptic"), 
-                "device": device
-            },
-            "facebook/detr-resnet-101": {
-                "model": pipeline(task="object-detection", model=f"{local_fold}/facebook/detr-resnet-101"), 
-                "device": device
-            },
+            # "facebook/detr-resnet-50-panoptic": {
+            #     "model": pipeline(task="image-segmentation", model=f"{local_fold}/facebook/detr-resnet-50-panoptic"), 
+            #     "device": device
+            # },
+            # "facebook/detr-resnet-101": {
+            #     "model": pipeline(task="object-detection", model=f"{local_fold}/facebook/detr-resnet-101"), 
+            #     "device": device
+            # },
             # "openai/clip-vit-large-patch14": {
             #     "model": pipeline(task="zero-shot-image-classification", model=f"{local_fold}/openai/clip-vit-large-patch14"), 
             #     "device": device
