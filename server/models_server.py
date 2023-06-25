@@ -123,7 +123,7 @@ def load_pipes(local_deployment):
             },
             # text-to-speech
             "espnet/kan-bayashi_ljspeech_vits": {
-                "model": Text2Speech.from_pretrained(f"{local_fold}/espnet/kan-bayashi_ljspeech_vits/exp/tts_train_vits_raw_phn_tacotron_g2p_en_no_space"),
+                "model": Text2Speech.from_pretrained(model_file=f"{local_fold}/espnet/kan-bayashi_ljspeech_vits/exp/tts_train_vits_raw_phn_tacotron_g2p_en_no_space/train.total_count.ave_10best.pth", train_config=f"{local_fold}/espnet/kan-bayashi_ljspeech_vits/exp/tts_train_vits_raw_phn_tacotron_g2p_en_no_space/config.yaml"),
                 "device": device
             },
             # image-to-image
