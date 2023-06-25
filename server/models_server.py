@@ -118,7 +118,7 @@ def load_pipes(local_deployment):
             # },
             # audio-to-audio
             "JorisCos/DCCRNet_Libri1Mix_enhsingle_16k": {
-                "model": BaseModel.from_pretrained(f"JorisCos/DCCRNet_Libri1Mix_enhsingle_16k"),
+                "model": BaseModel.from_pretrained(f"{local_fold}JorisCos/DCCRNet_Libri1Mix_enhsingle_16k/pytorch_model.bin"),
                 "device": device
             },
             # text-to-speech
