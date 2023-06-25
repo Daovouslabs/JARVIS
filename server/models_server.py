@@ -83,6 +83,7 @@ def load_pipes(local_deployment):
     standard_pipes = {}
     controlnet_sd_pipes = {}
     if local_deployment in ["full"]:
+        print('loading other_pipes...')
         other_pipes = {
             # image-to-text
             "nlpconnect/vit-gpt2-image-captioning":{
@@ -186,6 +187,7 @@ def load_pipes(local_deployment):
         }
 
     if local_deployment in ["full", "standard"]:
+        print('loading standard_pipes...')
         standard_pipes = {
             # "superb/wav2vec2-base-superb-ks": {
             #     "model": pipeline(task="audio-classification", model=f"{local_fold}/superb/wav2vec2-base-superb-ks"), 
@@ -279,6 +281,7 @@ def load_pipes(local_deployment):
         }
 
     if local_deployment in ["full", "standard", "minimal"]:
+        print('loading controlnet_sd_pipes...')
         controlnet = ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-canny", torch_dtype=torch.float16)
         controlnetpipe = StableDiffusionControlNetPipeline.from_pretrained(
             f"{local_fold}/runwayml/stable-diffusion-v1-5", controlnet=controlnet, torch_dtype=torch.float16
