@@ -160,7 +160,7 @@ def load_pipes(local_deployment):
                 "processor": SpeechT5Processor.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
                 "model": SpeechT5ForSpeechToSpeech.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
                 "vocoder": SpeechT5HifiGan.from_pretrained(f"{local_fold}/microsoft/speecht5_hifigan"),
-                "embeddings_dataset": load_dataset(f"{local_fold}/Matthijs/cmu-arctic-xvectors", split="validation"),
+                "embeddings_dataset": load_dataset(f"{local_fold}/Matthijs/cmu-arctic-xvectors/cmu-arctic-xvectors.py", data_dir=f"{local_fold}/Matthijs/cmu-arctic-xvectors/spkrec-xvect", split="validation"),
                 "device": device
             },
             # "julien-c/wine-quality": {
