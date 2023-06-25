@@ -156,13 +156,13 @@ def load_pipes(local_deployment):
             #     "device": device
             # },
             # audio-to-audio
-            "microsoft/speecht5_vc":{
-                "processor": SpeechT5Processor.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
-                "model": SpeechT5ForSpeechToSpeech.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
-                "vocoder": SpeechT5HifiGan.from_pretrained(f"{local_fold}/microsoft/speecht5_hifigan"),
-                "embeddings_dataset": load_dataset(f"{local_fold}/Matthijs/cmu-arctic-xvectors/cmu-arctic-xvectors.py", data_dir=f"{local_fold}/Matthijs/cmu-arctic-xvectors/spkrec-xvect", split="validation"),
-                "device": device
-            },
+            # "microsoft/speecht5_vc":{
+            #     "processor": SpeechT5Processor.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
+            #     "model": SpeechT5ForSpeechToSpeech.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
+            #     "vocoder": SpeechT5HifiGan.from_pretrained(f"{local_fold}/microsoft/speecht5_hifigan"),
+            #     "embeddings_dataset": load_dataset(f"{local_fold}/Matthijs/cmu-arctic-xvectors/cmu-arctic-xvectors.py", data_dir=f"{local_fold}/Matthijs/cmu-arctic-xvectors/spkrec-xvect", split="validation"),
+            #     "device": device
+            # },
             # "julien-c/wine-quality": {
             #     "model": joblib.load(cached_download(hf_hub_url("julien-c/wine-quality", "sklearn_model.joblib")))
             # },
@@ -172,17 +172,17 @@ def load_pipes(local_deployment):
             #     "device": device
             # },
             # image-segmentation
-            "facebook/maskformer-swin-base-coco": {
-                "feature_extractor": MaskFormerFeatureExtractor.from_pretrained(f"{local_fold}/facebook/maskformer-swin-base-coco"),
-                "model": MaskFormerForInstanceSegmentation.from_pretrained(f"{local_fold}/facebook/maskformer-swin-base-coco"),
-                "device": device
-            },
+            # "facebook/maskformer-swin-base-coco": {
+            #     "feature_extractor": MaskFormerFeatureExtractor.from_pretrained(f"{local_fold}/facebook/maskformer-swin-base-coco"),
+            #     "model": MaskFormerForInstanceSegmentation.from_pretrained(f"{local_fold}/facebook/maskformer-swin-base-coco"),
+            #     "device": device
+            # },
             # depth-estimation
-            "Intel/dpt-hybrid-midas": {
-                "model": DPTForDepthEstimation.from_pretrained(f"{local_fold}/Intel/dpt-hybrid-midas", low_cpu_mem_usage=True),
-                "feature_extractor": DPTFeatureExtractor.from_pretrained(f"{local_fold}/Intel/dpt-hybrid-midas"),
-                "device": device
-            }
+            # "Intel/dpt-hybrid-midas": {
+            #     "model": DPTForDepthEstimation.from_pretrained(f"{local_fold}/Intel/dpt-hybrid-midas", low_cpu_mem_usage=True),
+            #     "feature_extractor": DPTFeatureExtractor.from_pretrained(f"{local_fold}/Intel/dpt-hybrid-midas"),
+            #     "device": device
+            # }
         }
 
     if local_deployment in ["full", "standard"]:
@@ -196,10 +196,10 @@ def load_pipes(local_deployment):
                 "model": pipeline(task="automatic-speech-recognition", model=f"{local_fold}/openai/whisper-base"), 
                 "device": device
             },
-            "microsoft/speecht5_asr": {
-                "model": pipeline(task="automatic-speech-recognition", model=f"{local_fold}/microsoft/speecht5_asr"), 
-                "device": device
-            },
+            # "microsoft/speecht5_asr": {
+            #     "model": pipeline(task="automatic-speech-recognition", model=f"{local_fold}/microsoft/speecht5_asr"), 
+            #     "device": device
+            # },
             "Intel/dpt-large": {
                 "model": pipeline(task="depth-estimation", model=f"{local_fold}/Intel/dpt-large"), 
                 "device": device
@@ -220,10 +220,10 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="zero-shot-image-classification", model=f"{local_fold}/openai/clip-vit-large-patch14"), 
             #     "device": device
             # },
-            "google/owlvit-base-patch32": {
-                "model": pipeline(task="zero-shot-object-detection", model=f"{local_fold}/google/owlvit-base-patch32"), 
-                "device": device
-            },
+            # "google/owlvit-base-patch32": {
+            #     "model": pipeline(task="zero-shot-object-detection", model=f"{local_fold}/google/owlvit-base-patch32"), 
+            #     "device": device
+            # },
             # "microsoft/DialoGPT-medium": {
             #     "model": pipeline(task="conversational", model=f"{local_fold}/microsoft/DialoGPT-medium"), 
             #     "device": device
