@@ -191,7 +191,7 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="audio-classification", model=f"{local_fold}/superb/wav2vec2-base-superb-ks"), 
             #     "device": device
             # },
-            # automatic-speech-recognition
+            # automatic-speech-recognition audio-to-text
             "openai/whisper-base": {
                 "model": pipeline(task="automatic-speech-recognition", model=f"{local_fold}/openai/whisper-base"), 
                 "device": device
@@ -268,10 +268,10 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="document-question-answering", model=f"{local_fold}/impira/layoutlm-document-qa"), 
             #     "device": device
             # },
-            "ydshieh/vit-gpt2-coco-en": {
-                "model": pipeline(task="image-to-text", model=f"{local_fold}/ydshieh/vit-gpt2-coco-en"), 
-                "device": device
-            },
+            # "ydshieh/vit-gpt2-coco-en": {
+            #     "model": pipeline(task="image-to-text", model=f"{local_fold}/ydshieh/vit-gpt2-coco-en"), 
+            #     "device": device
+            # },
             "dandelin/vilt-b32-finetuned-vqa": {
                 "model": pipeline(task="visual-question-answering", model=f"{local_fold}/dandelin/vilt-b32-finetuned-vqa"), 
                 "device": device
