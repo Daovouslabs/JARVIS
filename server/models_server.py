@@ -342,6 +342,8 @@ def load_pipes(local_deployment):
 
 pipes = load_pipes(local_deployment)
 
+print(pipes.keys())
+
 end = time.time()
 during = end - start
 
