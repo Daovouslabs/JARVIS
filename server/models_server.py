@@ -118,12 +118,12 @@ def load_pipes(local_deployment):
             # },
             # audio-to-audio
             "JorisCos/DCCRNet_Libri1Mix_enhsingle_16k": {
-                "model": BaseModel.from_pretrained("JorisCos/DCCRNet_Libri1Mix_enhsingle_16k"),
+                "model": BaseModel.from_pretrained(f"{local_fold}/JorisCos/DCCRNet_Libri1Mix_enhsingle_16k"),
                 "device": device
             },
             # text-to-speech
             "espnet/kan-bayashi_ljspeech_vits": {
-                "model": Text2Speech.from_pretrained(f"espnet/kan-bayashi_ljspeech_vits"),
+                "model": Text2Speech.from_pretrained(f"{local_fold}/espnet/kan-bayashi_ljspeech_vits"),
                 "device": device
             },
             # image-to-image
