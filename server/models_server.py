@@ -84,6 +84,7 @@ def load_pipes(local_deployment):
     controlnet_sd_pipes = {}
     if local_deployment in ["full"]:
         other_pipes = {
+            # image-to-text
             "nlpconnect/vit-gpt2-image-captioning":{
                 "model": VisionEncoderDecoderModel.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
                 "feature_extractor": ViTImageProcessor.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
@@ -95,6 +96,7 @@ def load_pipes(local_deployment):
             #     "processor": BlipProcessor.from_pretrained(f"{local_fold}/Salesforce/blip-image-captioning-large"),
             #     "device": device
             # },
+            # text-to-video
             "damo-vilab/text-to-video-ms-1.7b": {
                 "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16"),
                 "device": device
@@ -114,14 +116,17 @@ def load_pipes(local_deployment):
             #     "model": VisionEncoderDecoderModel.from_pretrained(f"{local_fold}/microsoft/trocr-base-handwritten"),
             #     "device": device
             # },
+            # audio-to-audio
             "JorisCos/DCCRNet_Libri1Mix_enhsingle_16k": {
                 "model": BaseModel.from_pretrained("JorisCos/DCCRNet_Libri1Mix_enhsingle_16k"),
                 "device": device
             },
+            # text-to-speech
             "espnet/kan-bayashi_ljspeech_vits": {
                 "model": Text2Speech.from_pretrained(f"espnet/kan-bayashi_ljspeech_vits"),
                 "device": device
             },
+            # image-to-image
             "lambdalabs/sd-image-variations-diffusers": {
                 "model": DiffusionPipeline.from_pretrained(f"{local_fold}/lambdalabs/sd-image-variations-diffusers"), #torch_dtype=torch.float16
                 "device": device
@@ -134,6 +139,7 @@ def load_pipes(local_deployment):
             #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/stabilityai/stable-diffusion-2-1"),
             #     "device": device
             # },
+            # text-to_image
             "runwayml/stable-diffusion-v1-5": {
                 "model": DiffusionPipeline.from_pretrained(f"{local_fold}/runwayml/stable-diffusion-v1-5"),
                 "device": device
@@ -149,6 +155,7 @@ def load_pipes(local_deployment):
             #     "model": WaveformEnhancement.from_hparams(source="speechbrain/mtl-mimic-voicebank", savedir="models/mtl-mimic-voicebank"),
             #     "device": device
             # },
+            # audio-to-audio
             "microsoft/speecht5_vc":{
                 "processor": SpeechT5Processor.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
                 "model": SpeechT5ForSpeechToSpeech.from_pretrained(f"{local_fold}/microsoft/speecht5_vc"),
@@ -164,11 +171,13 @@ def load_pipes(local_deployment):
             #     "model": TimesformerForVideoClassification.from_pretrained(f"{local_fold}/facebook/timesformer-base-finetuned-k400"),
             #     "device": device
             # },
+            # image-segmentation
             "facebook/maskformer-swin-base-coco": {
                 "feature_extractor": MaskFormerFeatureExtractor.from_pretrained(f"{local_fold}/facebook/maskformer-swin-base-coco"),
                 "model": MaskFormerForInstanceSegmentation.from_pretrained(f"{local_fold}/facebook/maskformer-swin-base-coco"),
                 "device": device
             },
+            # depth-estimation
             "Intel/dpt-hybrid-midas": {
                 "model": DPTForDepthEstimation.from_pretrained(f"{local_fold}/Intel/dpt-hybrid-midas", low_cpu_mem_usage=True),
                 "feature_extractor": DPTFeatureExtractor.from_pretrained(f"{local_fold}/Intel/dpt-hybrid-midas"),
@@ -182,6 +191,7 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="audio-classification", model=f"{local_fold}/superb/wav2vec2-base-superb-ks"), 
             #     "device": device
             # },
+            # automatic-speech-recognition
             "openai/whisper-base": {
                 "model": pipeline(task="automatic-speech-recognition", model=f"{local_fold}/openai/whisper-base"), 
                 "device": device
@@ -254,10 +264,10 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="translation", model=f"{local_fold}/t5-base"), 
             #     "device": device
             # },
-            "impira/layoutlm-document-qa": {
-                "model": pipeline(task="document-question-answering", model=f"{local_fold}/impira/layoutlm-document-qa"), 
-                "device": device
-            },
+            # "impira/layoutlm-document-qa": {
+            #     "model": pipeline(task="document-question-answering", model=f"{local_fold}/impira/layoutlm-document-qa"), 
+            #     "device": device
+            # },
             "ydshieh/vit-gpt2-coco-en": {
                 "model": pipeline(task="image-to-text", model=f"{local_fold}/ydshieh/vit-gpt2-coco-en"), 
                 "device": device
