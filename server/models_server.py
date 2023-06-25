@@ -118,10 +118,10 @@ def load_pipes(local_deployment):
             #     "device": device
             # },
             # audio-to-audio
-            "JorisCos/DCCRNet_Libri1Mix_enhsingle_16k": {
-                "model": BaseModel.from_pretrained(f"{local_fold}/JorisCos/DCCRNet_Libri1Mix_enhsingle_16k/pytorch_model.bin"),
-                "device": device
-            },
+            # "JorisCos/DCCRNet_Libri1Mix_enhsingle_16k": {
+            #     "model": BaseModel.from_pretrained(f"{local_fold}/JorisCos/DCCRNet_Libri1Mix_enhsingle_16k/pytorch_model.bin"),
+            #     "device": device
+            # },
             # text-to-speech
             "espnet/kan-bayashi_ljspeech_vits": {
                 "model": Text2Speech.from_pretrained(model_file=f"{local_fold}/espnet/kan-bayashi_ljspeech_vits/exp/tts_train_vits_raw_phn_tacotron_g2p_en_no_space/train.total_count.ave_10best.pth", train_config=f"{local_fold}/espnet/kan-bayashi_ljspeech_vits/exp/tts_train_vits_raw_phn_tacotron_g2p_en_no_space/config.yaml"),
@@ -202,10 +202,10 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="automatic-speech-recognition", model=f"{local_fold}/microsoft/speecht5_asr"), 
             #     "device": device
             # },
-            "Intel/dpt-large": {
-                "model": pipeline(task="depth-estimation", model=f"{local_fold}/Intel/dpt-large"), 
-                "device": device
-            },
+            # "Intel/dpt-large": {
+            #     "model": pipeline(task="depth-estimation", model=f"{local_fold}/Intel/dpt-large"), 
+            #     "device": device
+            # },
             # "microsoft/beit-base-patch16-224-pt22k-ft22k": {
             #     "model": pipeline(task="image-classification", model=f"{local_fold}/microsoft/beit-base-patch16-224-pt22k-ft22k"), 
             #     "device": device
