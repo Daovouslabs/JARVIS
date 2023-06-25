@@ -86,22 +86,22 @@ def load_pipes(local_deployment):
         print('loading other_pipes...')
         other_pipes = {
             # image-to-text
-            "nlpconnect/vit-gpt2-image-captioning":{
-                "model": VisionEncoderDecoderModel.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
-                "feature_extractor": ViTImageProcessor.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
-                "tokenizer": AutoTokenizer.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
-                "device": device
-            },
+            # "nlpconnect/vit-gpt2-image-captioning":{
+            #     "model": VisionEncoderDecoderModel.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
+            #     "feature_extractor": ViTImageProcessor.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
+            #     "tokenizer": AutoTokenizer.from_pretrained(f"{local_fold}/nlpconnect/vit-gpt2-image-captioning"),
+            #     "device": device
+            # },
             # "Salesforce/blip-image-captioning-large": {
             #     "model": BlipForConditionalGeneration.from_pretrained(f"{local_fold}/Salesforce/blip-image-captioning-large"),
             #     "processor": BlipProcessor.from_pretrained(f"{local_fold}/Salesforce/blip-image-captioning-large"),
             #     "device": device
             # },
             # text-to-video
-            "damo-vilab/text-to-video-ms-1.7b": {
-                "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16"),
-                "device": device
-            },
+            # "damo-vilab/text-to-video-ms-1.7b": {
+            #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16"),
+            #     "device": device
+            # },
             # "facebook/maskformer-swin-large-ade": {
             #     "model": MaskFormerForInstanceSegmentation.from_pretrained(f"{local_fold}/facebook/maskformer-swin-large-ade"),
             #     "feature_extractor" : AutoFeatureExtractor.from_pretrained("facebook/maskformer-swin-large-ade"),
@@ -128,10 +128,10 @@ def load_pipes(local_deployment):
                 "device": device
             },
             # image-to-image
-            "lambdalabs/sd-image-variations-diffusers": {
-                "model": DiffusionPipeline.from_pretrained(f"{local_fold}/lambdalabs/sd-image-variations-diffusers"), #torch_dtype=torch.float16
-                "device": device
-            },
+            # "lambdalabs/sd-image-variations-diffusers": {
+            #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/lambdalabs/sd-image-variations-diffusers"), #torch_dtype=torch.float16
+            #     "device": device
+            # },
             # "CompVis/stable-diffusion-v1-4": {
             #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/CompVis/stable-diffusion-v1-4"),
             #     "device": device
@@ -270,10 +270,10 @@ def load_pipes(local_deployment):
             #     "model": pipeline(task="document-question-answering", model=f"{local_fold}/impira/layoutlm-document-qa"), 
             #     "device": device
             # },
-            # "ydshieh/vit-gpt2-coco-en": {
-            #     "model": pipeline(task="image-to-text", model=f"{local_fold}/ydshieh/vit-gpt2-coco-en"), 
-            #     "device": device
-            # },
+            "ydshieh/vit-gpt2-coco-en": {
+                "model": pipeline(task="image-to-text", model=f"{local_fold}/ydshieh/vit-gpt2-coco-en"), 
+                "device": device
+            },
             "dandelin/vilt-b32-finetuned-vqa": {
                 "model": pipeline(task="visual-question-answering", model=f"{local_fold}/dandelin/vilt-b32-finetuned-vqa"), 
                 "device": device
