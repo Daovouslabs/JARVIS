@@ -373,7 +373,6 @@ def choose_model(input, task, metas, api_key, api_type, api_endpoint):
     }
     return send_request(data)
 
-
 def response_results(input, results, api_key, api_type, api_endpoint):
     results = [v for k, v in sorted(results.items(), key=lambda item: item[0])]
     prompt = replace_slot(response_results_prompt, {
@@ -634,7 +633,6 @@ def local_model_inference(model_id, data, task):
         response = requests.post(task_url, json={"audio_url": audio_url})
         return response.json()
 
-
 def model_inference(model_id, data, hosted_on, task):
     if hosted_on == "unknown":
         localStatusUrl = f"{Model_Server}/status/{model_id}"
@@ -658,7 +656,6 @@ def model_inference(model_id, data, hosted_on, task):
         traceback.print_exc()
         inference_result = {"error":{"message": str(e)}}
     return inference_result
-
 
 def get_model_status(model_id, url, headers, queue = None):
     endpoint_type = "huggingface" if "huggingface" in url else "local"
@@ -715,7 +712,6 @@ def collect_result(command, choose, inference_result):
     result["choose model result"] = choose
     logger.debug(f"inference result: {inference_result}")
     return result
-
 
 def run_task(input, command, results, api_key, api_type, api_endpoint):
     id = command["id"]
@@ -1020,44 +1016,55 @@ def server():
     app.config['DEBUG'] = False
     CORS(app)
     
-    @cross_origin()
-    @app.route('/tasks', methods=['POST'])
-    def tasks():
-        data = request.get_json()
-        messages = data["messages"]
-        api_key = data.get("api_key", API_KEY)
-        api_endpoint = data.get("api_endpoint", API_ENDPOINT)
-        api_type = data.get("api_type", API_TYPE)
-        if api_key is None or api_type is None or api_endpoint is None:
-            return jsonify({"error": "Please provide api_key, api_type and api_endpoint"}) 
-        response = chat_huggingface(messages, api_key, api_type, api_endpoint, return_planning=True)
-        return jsonify(response)
+    # @cross_origin()
+    # @app.route('/tasks', methods=['POST'])
+    # def tasks():
+    #     data = request.get_json()
+    #     messages = data["messages"]
+    #     api_key = data.get("api_key", API_KEY)
+    #     api_endpoint = data.get("api_endpoint", API_ENDPOINT)
+    #     api_type = data.get("api_type", API_TYPE)
+    #     if api_key is None or api_type is None or api_endpoint is None:
+    #         return jsonify({"error": "Please provide api_key, api_type and api_endpoint"}) 
+    #     response = chat_huggingface(messages, api_key, api_type, api_endpoint, return_planning=True)
+    #     return jsonify(response)
+
+    # @cross_origin()
+    # @app.route('/results', methods=['POST'])
+    # def results():
+    #     data = request.get_json()
+    #     messages = data["messages"]
+    #     api_key = data.get("api_key", API_KEY)
+    #     api_endpoint = data.get("api_endpoint", API_ENDPOINT)
+    #     api_type = data.get("api_type", API_TYPE)
+    #     if api_key is None or api_type is None or api_endpoint is None:
+    #         return jsonify({"error": "Please provide api_key, api_type and api_endpoint"}) 
+    #     response = chat_huggingface(messages, api_key, api_type, api_endpoint, return_results=True)
+    #     return jsonify(response)
+
+    # @cross_origin()
+    # @app.route('/hugginggpt', methods=['POST'])
+    # def chat():
+    #     data = request.get_json()
+    #     messages = data["messages"]
+    #     api_key = data.get("api_key", API_KEY)
+    #     api_endpoint = data.get("api_endpoint", API_ENDPOINT)
+    #     api_type = data.get("api_type", API_TYPE)
+    #     if api_key is None or api_type is None or api_endpoint is None:
+    #         return jsonify({"error": "Please provide api_key, api_type and api_endpoint"}) 
+    #     response = chat_huggingface(messages, api_key, api_type, api_endpoint)
+    #     return jsonify(response)
 
     @cross_origin()
-    @app.route('/results', methods=['POST'])
-    def results():
-        data = request.get_json()
-        messages = data["messages"]
-        api_key = data.get("api_key", API_KEY)
-        api_endpoint = data.get("api_endpoint", API_ENDPOINT)
-        api_type = data.get("api_type", API_TYPE)
-        if api_key is None or api_type is None or api_endpoint is None:
-            return jsonify({"error": "Please provide api_key, api_type and api_endpoint"}) 
-        response = chat_huggingface(messages, api_key, api_type, api_endpoint, return_results=True)
+    @app.route('/models/<path:model_id>', methods=['POST'])
+    def models(model_id):
+        task = METADATAS.get(model_id, {}).get('pipeline_tag', 'unknown')
+        hosted_on = "unknown"
+        if model_id.endswith('-control') or model_id.startswith('lllyasviel/sd-controlnet'):
+            hosted_on = 'local'
+        response = model_inference(model_id, request.get_json(), hosted_on, task)
         return jsonify(response)
 
-    @cross_origin()
-    @app.route('/hugginggpt', methods=['POST'])
-    def chat():
-        data = request.get_json()
-        messages = data["messages"]
-        api_key = data.get("api_key", API_KEY)
-        api_endpoint = data.get("api_endpoint", API_ENDPOINT)
-        api_type = data.get("api_type", API_TYPE)
-        if api_key is None or api_type is None or api_endpoint is None:
-            return jsonify({"error": "Please provide api_key, api_type and api_endpoint"}) 
-        response = chat_huggingface(messages, api_key, api_type, api_endpoint)
-        return jsonify(response)
     print("server running...")
     waitress.serve(app, host=host, port=port)
 
