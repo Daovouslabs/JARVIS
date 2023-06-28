@@ -410,12 +410,13 @@ def models(model_id):
 
         # controlnet
         if model_id.startswith("lllyasviel/sd-controlnet-"):
-            # pipe.controlnet.to('cpu')
+            pipe.controlnet.to('cpu')
             pipe.controlnet = pipes[model_id]["control"].to(pipes[model_id]["device"])
             pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
             control_image = load_image(request.get_json()["img_url"])
             # generator = torch.manual_seed(66)
             out_image: Image = pipe(request.get_json()["text"], num_inference_steps=20, image=control_image).images[0]
+            print("finish!")
             file_name = str(uuid.uuid4())[:4]
             out_image.save(f"public/images/{file_name}.png")
             result = {"path": f"/images/{file_name}.png"}

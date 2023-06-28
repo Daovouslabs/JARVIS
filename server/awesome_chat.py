@@ -1006,7 +1006,6 @@ def cli():
         print("[ Jarvis ]: ", answer["message"])
         messages.append({"role": "assistant", "content": answer["message"]})
 
-
 def server():
     http_listen = config["http_listen"]
     host = http_listen["host"]
