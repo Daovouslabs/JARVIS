@@ -619,8 +619,9 @@ def models(model_id):
 
     if "device" in pipes[model_id]:
         try:
-            print("to CPU")
+            print("to CPU--0")
             pipe.to("cpu")
+            print("to CPU--1")
             torch.cuda.empty_cache()
         except:
             print("except to CPU")
