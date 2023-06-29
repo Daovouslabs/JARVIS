@@ -412,7 +412,7 @@ def models(model_id):
 
         # controlnet
         if model_id.startswith("lllyasviel/sd-controlnet-"):
-            pipe.controlnet.to('cpu')
+            # pipe.controlnet.to('cpu')
             pipe.controlnet = pipes[model_id]["control"].to(pipes[model_id]["device"])
             pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
             control_image = load_image(request.get_json()["img_url"])
