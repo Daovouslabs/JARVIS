@@ -622,6 +622,8 @@ def models(model_id):
             print("to CPU--0")
             pipe.to("cpu")
             print("to CPU--1")
+            import gc
+            gc.collect()
             torch.cuda.empty_cache()
         except:
             print("except to CPU")
