@@ -99,7 +99,7 @@ def load_pipes(local_deployment):
             # },
             # text-to-video
             # "damo-vilab/text-to-video-ms-1.7b": {
-            #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", variant="fp16"),
+            #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16"),
             #     "device": device
             # },
             # "facebook/maskformer-swin-large-ade": {
@@ -282,9 +282,9 @@ def load_pipes(local_deployment):
 
     if local_deployment in ["full", "standard", "minimal"]:
         print('loading controlnet_sd_pipes...')
-        controlnet = ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-canny")
+        controlnet = ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-canny", torch_dtype=torch.float16)
         controlnetpipe = StableDiffusionControlNetPipeline.from_pretrained(
-            f"{local_fold}/runwayml/stable-diffusion-v1-5", controlnet=controlnet
+            f"{local_fold}/runwayml/stable-diffusion-v1-5", controlnet=controlnet, torch_dtype=torch.float16
         )
 
         def mlsd_control_network():
@@ -320,32 +320,32 @@ def load_pipes(local_deployment):
                 "device": device
             },
             "lllyasviel/sd-controlnet-depth":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-depth"),
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-depth", torch_dtype=torch.float16),
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-hed":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-hed"), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-hed", torch_dtype=torch.float16), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-mlsd":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-mlsd"), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-mlsd", torch_dtype=torch.float16), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-openpose":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-openpose"), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-scribble":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-scribble"), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-scribble", torch_dtype=torch.float16), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-seg":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-seg"), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-seg", torch_dtype=torch.float16), 
                 "model": controlnetpipe,
                 "device": device
             }    
@@ -391,8 +391,6 @@ def models(model_id):
     if "device" in pipes[model_id]:
         try:
             pipe.to(pipes[model_id]["device"])
-            import gc
-            gc.collect()
         except:
             pipe.device = torch.device(pipes[model_id]["device"])
             pipe.model.to(pipes[model_id]["device"])
@@ -412,13 +410,13 @@ def models(model_id):
 
         # controlnet
         if model_id.startswith("lllyasviel/sd-controlnet-"):
-            # pipe.controlnet.to('cpu')
+            pipe.controlnet.to('cpu')
             pipe.controlnet = pipes[model_id]["control"].to(pipes[model_id]["device"])
             pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
             control_image = load_image(request.get_json()["img_url"])
             # generator = torch.manual_seed(66)
             out_image: Image = pipe(request.get_json()["text"], num_inference_steps=20, image=control_image).images[0]
-            print("finish!")
+            print("finish")
             file_name = str(uuid.uuid4())[:4]
             out_image.save(f"public/images/{file_name}.png")
             result = {"path": f"/images/{file_name}.png"}
@@ -621,9 +619,7 @@ def models(model_id):
 
     if "device" in pipes[model_id]:
         try:
-            print("to CPU--0")
             pipe.to("cpu")
-            print("to CPU--1")
             torch.cuda.empty_cache()
         except:
             pipe.device = torch.device("cpu")
