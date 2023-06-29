@@ -90,15 +90,11 @@ For example:
 
 ```bash
 # request
-curl --location 'http://localhost:8004/tasks' \
+curl --location 'http://localhost:8004/models/dandelin/vilt-b32-finetuned-vqa' \
 --header 'Content-Type: application/json' \
 --data '{
-    "messages": [
-        {
-            "role": "user",
-            "content": "based on pose of /examples/d.jpg and content of /examples/e.jpg, please show me a new image"
-        }
-    ]
+    "image": "https://www.southernliving.com/thmb/FlPNHGSV-VVRaR3ZZCbkAi4Vn9k=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gettyimages-114166947-1-268128f97e5c415baede328c1fe32f55.jpg",
+    "text": "how many dog in the image"
 }'
 
 # response

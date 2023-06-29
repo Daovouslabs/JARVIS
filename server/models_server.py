@@ -99,7 +99,7 @@ def load_pipes(local_deployment):
             # },
             # text-to-video
             # "damo-vilab/text-to-video-ms-1.7b": {
-            #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16"),
+            #     "model": DiffusionPipeline.from_pretrained(f"{local_fold}/damo-vilab/text-to-video-ms-1.7b", variant="fp16"),
             #     "device": device
             # },
             # "facebook/maskformer-swin-large-ade": {
@@ -282,9 +282,9 @@ def load_pipes(local_deployment):
 
     if local_deployment in ["full", "standard", "minimal"]:
         print('loading controlnet_sd_pipes...')
-        controlnet = ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-canny", torch_dtype=torch.float16)
+        controlnet = ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-canny")
         controlnetpipe = StableDiffusionControlNetPipeline.from_pretrained(
-            f"{local_fold}/runwayml/stable-diffusion-v1-5", controlnet=controlnet, torch_dtype=torch.float16
+            f"{local_fold}/runwayml/stable-diffusion-v1-5", controlnet=controlnet
         )
 
         def mlsd_control_network():
@@ -320,32 +320,32 @@ def load_pipes(local_deployment):
                 "device": device
             },
             "lllyasviel/sd-controlnet-depth":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-depth", torch_dtype=torch.float16),
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-depth"),
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-hed":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-hed", torch_dtype=torch.float16), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-hed"), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-mlsd":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-mlsd", torch_dtype=torch.float16), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-mlsd"), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-openpose":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-openpose"), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-scribble":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-scribble", torch_dtype=torch.float16), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-scribble"), 
                 "model": controlnetpipe,
                 "device": device
             },
             "lllyasviel/sd-controlnet-seg":{
-                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-seg", torch_dtype=torch.float16), 
+                "control": ControlNetModel.from_pretrained(f"{local_fold}/lllyasviel/sd-controlnet-seg"), 
                 "model": controlnetpipe,
                 "device": device
             }    
