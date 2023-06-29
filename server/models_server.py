@@ -391,6 +391,8 @@ def models(model_id):
     if "device" in pipes[model_id]:
         try:
             pipe.to(pipes[model_id]["device"])
+            import gc
+            gc.collect()
         except:
             pipe.device = torch.device(pipes[model_id]["device"])
             pipe.model.to(pipes[model_id]["device"])
@@ -622,11 +624,8 @@ def models(model_id):
             print("to CPU--0")
             pipe.to("cpu")
             print("to CPU--1")
-            import gc
-            gc.collect()
             torch.cuda.empty_cache()
         except:
-            print("except to CPU")
             pipe.device = torch.device("cpu")
             pipe.model.to("cpu")
             torch.cuda.empty_cache()
