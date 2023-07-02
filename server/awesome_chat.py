@@ -1078,7 +1078,7 @@ def server():
     #     return jsonify(response)
 
     @cross_origin()
-    @app.route('/models/<path:model_id>', methods=['POST'])
+    @app.post('/models/<path:model_id>')
     def models(model_id):
         task = METADATAS.get(model_id, {}).get('pipeline_tag', 'unknown')
         hosted_on = "unknown"
