@@ -1028,6 +1028,7 @@ def cli():
 
 def server():
     from fastapi.staticfiles import StaticFiles
+    from starlette.middleware.cors import CORSMiddleware
     http_listen = config["http_listen"]
     host = http_listen["host"]
     port = http_listen["port"]
