@@ -6,13 +6,13 @@
 	"description_for_model": "useful when you want to generate an image from a user input text and save it to a file. like: generate an image of an object or something, or generate an image that includes some objects. The input to this tool should be a string, representing the text used to generate image. ",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/runwayml/stable-diffusion-v1-5/ai-plugin.json",
+		"url": "http://jarvis.daovous.xyz/.well-known/runwayml/stable-diffusion-v1-5/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {
 		"type": "none"
 	},
-	"logo_url": "https://www.klarna.com/assets/sites/5/2020/04/27143923/klarna-K-150x150.jpg",
-	"contact_email": "openai-products@klarna.com",
-	"legal_info_url": "https://www.klarna.com/us/legal/"
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
 }
