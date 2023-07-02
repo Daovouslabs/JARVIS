@@ -13,6 +13,7 @@ import json
 import logging
 import argparse
 import yaml
+from glob import glob
 from PIL import Image, ImageDraw
 from diffusers.utils import load_image
 from pydub import AudioSegment
@@ -1082,6 +1083,15 @@ def server():
         if model_id.endswith('-control') or model_id.startswith('lllyasviel/sd-controlnet'):
             hosted_on = 'local'
         response = model_inference(model_id, request.get_json(), hosted_on, task)
+        return jsonify(response)
+    
+    @cross_origin()
+    @app.route('/models/list', methods=['GET'])
+    def get_all_avaliables_models():
+        models = [n[6:] for n in glob("public/.well-known/**/*.json", recursive=True)]
+        response = {
+            "models": models
+        }
         return jsonify(response)
 
     print("server running...")
