@@ -1038,13 +1038,13 @@ def server():
     # CORS(app)
 
     app = FastAPI()
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+    # app.add_middleware(
+    #     CORSMiddleware,
+    #     allow_origins=["*"],
+    #     allow_credentials=True,
+    #     allow_methods=["*"],
+    #     allow_headers=["*"],
+    # )
     app.mount("/", StaticFiles(directory="public"), name="static")
     # @cross_origin()
     # @app.route('/tasks', methods=['POST'])
