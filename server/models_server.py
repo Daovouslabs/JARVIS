@@ -39,7 +39,7 @@ from asteroid.models import BaseModel
 import traceback
 import os
 import yaml
-from server.utils.aws_utils.s3_uilts import S3Client
+from utils.aws_utils.s3_uilts import S3Client
 
 warnings.filterwarnings("ignore")
 

@@ -25,7 +25,7 @@ from flask_cors import CORS, cross_origin
 from get_token_ids import get_token_ids_for_task_parsing, get_token_ids_for_choose_model, count_tokens, get_max_context_length
 from huggingface_hub.inference_api import InferenceApi
 from huggingface_hub.inference_api import ALL_TASKS
-from server.utils.aws_utils.s3_uilts import S3Client
+from utils.aws_utils.s3_uilts import S3Client
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--config", type=str, default="configs/config.default.yaml")
