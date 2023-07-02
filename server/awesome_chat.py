@@ -443,10 +443,10 @@ def huggingface_model_inference(model_id, data, task):
         img = inference(inputs)
         file_name = str(uuid.uuid4())[:4]
         img.save(f"public/images/{file_name}.png")
-        s3_client.upload_file(
-            f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-        )
-        result = {"generated image": c}
+        # s3_client.upload_file(
+        #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+        # )
+        result = {"generated image": f"/images/{file_name}.png"}
 
     if task == "image-segmentation":
         img_url = data["image"]
@@ -467,11 +467,11 @@ def huggingface_model_inference(model_id, data, task):
             image.paste(layer, (0, 0), mask)
         name = str(uuid.uuid4())[:4]
         image.save(f"public/images/{name}.jpg")
-        s3_client.upload_file(
-            f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
-        )
+        # s3_client.upload_file(
+        #     f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
+        # )
         result = {}
-        result["generated image"] = f"{s3_domain}/images/{name}.jpg"
+        result["generated image"] = f"/images/{name}.jpg"
         result["predicted"] = predicted
 
     if task == "object-detection":
@@ -491,11 +491,11 @@ def huggingface_model_inference(model_id, data, task):
             draw.text((box["xmin"]+5, box["ymin"]-15), label["label"], fill=color_map[label["label"]])
         name = str(uuid.uuid4())[:4]
         image.save(f"public/images/{name}.jpg")
-        s3_client.upload_file(
-            f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
-        )
+        # s3_client.upload_file(
+        #     f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
+        # )
         result = {}
-        result["generated image"] = f"{s3_domain}/images/{name}.jpg"
+        result["generated image"] = f"/images/{name}.jpg"
         result["predicted"] = predicted
 
     if task in ["image-classification"]:
@@ -520,10 +520,10 @@ def huggingface_model_inference(model_id, data, task):
         name = str(uuid.uuid4())[:4]
         with open(f"public/audios/{name}.flac", "wb") as f:
             f.write(response.content)
-        s3_client.upload_file(
-            f"public/audios/{name}.flac", object_name=f"public/audios/{name}.flac"
-        )
-        result = {"generated audio": f"{s3_domain}/audios/{name}.flac"}
+        # s3_client.upload_file(
+        #     f"public/audios/{name}.flac", object_name=f"public/audios/{name}.flac"
+        # )
+        result = {"generated audio": f"/audios/{name}.flac"}
     if task in ["automatic-speech-recognition", "audio-to-audio", "audio-classification"]:
         audio_url = data["audio"]
         audio_data = requests.get(audio_url, timeout=10).content
@@ -540,10 +540,10 @@ def huggingface_model_inference(model_id, data, task):
             audio = AudioSegment.from_file(BytesIO(content))
             name = str(uuid.uuid4())[:4]
             audio.export(f"public/audios/{name}.{type}", format=type)
-        s3_client.upload_file(
-            f"public/audios/{name}.{type}", object_name=f"public/audios/{name}.{type}"
-        )
-        result = {"generated audio": f"{s3_domain}/audios/{name}.{type}"}
+        # s3_client.upload_file(
+        #     f"public/audios/{name}.{type}", object_name=f"public/audios/{name}.{type}"
+        # )
+        result = {"generated audio": f"/audios/{name}.{type}"}
     return result
 
 def local_model_inference(model_id, data, task):

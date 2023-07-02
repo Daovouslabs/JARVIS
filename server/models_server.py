@@ -409,10 +409,10 @@ def models(model_id):
             video_path = export_to_video(video_frames)
             file_name = str(uuid.uuid4())[:4]
             os.system(f"LD_LIBRARY_PATH=/usr/local/lib /usr/local/bin/ffmpeg -i {video_path} -vcodec libx264 public/videos/{file_name}.mp4")
-            s3_client.upload_file(
-                'public/videos/{file_name}.mp4', object_name='public/videos/{file_name}.mp4')
-            # result = {"path": f"/videos/{file_name}.mp4"}
-            result = {"path": f"{s3_domain}/videos/{file_name}.mp4"}
+            result = {"path": f"/videos/{file_name}.mp4"}
+            # s3_client.upload_file(
+            #     'public/videos/{file_name}.mp4', object_name='public/videos/{file_name}.mp4')
+            # result = {"path": f"{s3_domain}/videos/{file_name}.mp4"}
 
         # controlnet
         if model_id.startswith("lllyasviel/sd-controlnet-"):
@@ -425,10 +425,11 @@ def models(model_id):
             print("finish")
             file_name = str(uuid.uuid4())[:4]
             out_image.save(f"public/images/{file_name}.png")
-            s3_client.upload_file(
-                f"public/images/{file_name}.png", object_name=f"public/images/{file_name}.png")
+            result = {"path": f"/images/{file_name}.png"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.png", object_name=f"public/images/{file_name}.png")
             
-            result = {"path": f"{s3_domain}/images/{file_name}.png"}
+            # result = {"path": f"{s3_domain}/images/{file_name}.png"}
 
         if model_id.endswith("-control"):
             image = load_image(request.get_json()["img_url"])
@@ -440,9 +441,10 @@ def models(model_id):
                 control = pipe(image)
             file_name = str(uuid.uuid4())[:4]
             control.save(f"public/images/{file_name}.png")
-            s3_client.upload_file(
-                f"public/images/{file_name}.png", object_name=f"public/images/{file_name}.png")
-            result = {"path": f"{s3_domain}/images/{file_name}.png"}
+            result = {"path": f"/images/{file_name}.png"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.png", object_name=f"public/images/{file_name}.png")
+            # result = {"path": f"{s3_domain}/images/{file_name}.png"}
 
         # image to image
         if model_id == "lambdalabs/sd-image-variations-diffusers":
@@ -464,11 +466,11 @@ def models(model_id):
             inp = tform(im).to(pipes[model_id]["device"]).unsqueeze(0)
             out = pipe(inp, guidance_scale=3)
             out["images"][0].save(f"public/images/{file_name}.jpg")
-
-            s3_client.upload_file(
-                f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-            )
-            result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
+            result = {"path": f"/images/{file_name}.jpg"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+            # )
+            # result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
 
         # image to text
         if model_id == "Salesforce/blip-image-captioning-large":
@@ -504,11 +506,11 @@ def models(model_id):
             text = request.get_json()["text"]
             out = pipe(prompt=text)
             out["images"][0].save(f"public/images/{file_name}.jpg")
-
-            s3_client.upload_file(
-                f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-            )
-            result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
+            result = {"path": f"/images/{file_name}.jpg"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+            # )
+            # result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
 
         # object detection
         if model_id == "google/owlvit-base-patch32" or model_id == "facebook/detr-resnet-101":
@@ -534,10 +536,11 @@ def models(model_id):
             image = output['depth']
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
-            s3_client.upload_file(
-                f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-            )
-            result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
+            result = {"path": f"/images/{file_name}.jpg"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+            # )
+            # result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
 
         if model_id == "Intel/dpt-hybrid-midas" and model_id == "Intel/dpt-large":
             image = load_image(request.get_json()["img_url"])
@@ -556,10 +559,11 @@ def models(model_id):
             image = Image.fromarray(formatted)
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
-            s3_client.upload_file(
-                f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-            )
-            result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
+            result = {"path": f"/images/{file_name}.jpg"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+            # )
+            # result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
 
         # TTS
         if model_id == "espnet/kan-bayashi_ljspeech_vits":
@@ -569,10 +573,11 @@ def models(model_id):
             sf.write(f"public/audios/{file_name}.wav",
                      wav.cpu().numpy(), pipe.fs, "PCM_16")
 
-            s3_client.upload_file(
-                f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
-            )
-            result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
+            result = {"path": f"/audios/{file_name}.wav"}
+            # s3_client.upload_file(
+            #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
+            # )
+            # result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
 
         if model_id == "microsoft/speecht5_tts":
             text = request.get_json()["text"]
@@ -583,11 +588,11 @@ def models(model_id):
             speech = pipe.generate_speech(inputs["input_ids"].to(pipes[model_id]["device"]), speaker_embeddings, vocoder=pipes[model_id]["vocoder"])
             file_name = str(uuid.uuid4())[:4]
             sf.write(f"public/audios/{file_name}.wav", speech.cpu().numpy(), samplerate=16000)
-
-            s3_client.upload_file(
-                f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
-            )
-            result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
+            result = {"path": f"/audios/{file_name}.wav"}
+            # s3_client.upload_file(
+            #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
+            # )
+            # result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
 
         # ASR
         if model_id == "openai/whisper-base" or model_id == "microsoft/speecht5_asr":
@@ -603,10 +608,11 @@ def models(model_id):
             file_name = str(uuid.uuid4())[:4]
             sf.write(f"public/audios/{file_name}.wav", result_wav.cpu().squeeze().numpy(), sr)
 
-            s3_client.upload_file(
-                f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
-            )
-            result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
+            result = {"path": f"/audios/{file_name}.wav"}
+            # s3_client.upload_file(
+            #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
+            # )
+            # result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
         
         if model_id == "microsoft/speecht5_vc":
             audio_url = request.get_json()["audio_url"]
@@ -618,10 +624,12 @@ def models(model_id):
             speech = pipe.generate_speech(inputs["input_ids"].to(pipes[model_id]["device"]), speaker_embeddings, vocoder=pipes[model_id]["vocoder"])
             file_name = str(uuid.uuid4())[:4]
             sf.write(f"public/audios/{file_name}.wav", speech.cpu().numpy(), samplerate=16000)
-            s3_client.upload_file(
-                f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
-            )
-            result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
+
+            result = {"path": f"/audios/{file_name}.wav"}
+            # s3_client.upload_file(
+            #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
+            # )
+            # result = {"path": f"{s3_domain}/audios/{file_name}.wav"}
         
         # segmentation
         if model_id == "facebook/detr-resnet-50-panoptic":
@@ -640,10 +648,12 @@ def models(model_id):
                 image.paste(layer, (0, 0), mask)
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
-            s3_client.upload_file(
-                f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-            )
-            result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
+
+            result = {"path": f"/images/{file_name}.jpg"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+            # )
+            # result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
 
         if model_id == "facebook/maskformer-swin-base-coco" or model_id == "facebook/maskformer-swin-large-ade":
             image = load_image(request.get_json()["img_url"])
@@ -654,10 +664,12 @@ def models(model_id):
             predicted_panoptic_map = Image.fromarray(predicted_panoptic_map.astype(np.uint8))
             file_name = str(uuid.uuid4())[:4]
             predicted_panoptic_map.save(f"public/images/{file_name}.jpg")
-            s3_client.upload_file(
-                f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
-            )
-            result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
+
+            result = {"path": f"/images/{file_name}.jpg"}
+            # s3_client.upload_file(
+            #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+            # )
+            # result = {"path": f"{s3_domain}/images/{file_name}.jpg"}
 
     except Exception as e:
         print(e)
