@@ -90,11 +90,30 @@ For example:
 
 ```bash
 # request
-curl --location 'http://localhost:8004/models/dandelin/vilt-b32-finetuned-vqa' \
+curl --location 'http://localhost:8004/models/lllyasviel/sd-controlnet-canny' \
 --header 'Content-Type: application/json' \
 --data '{
-    "image": "https://www.southernliving.com/thmb/FlPNHGSV-VVRaR3ZZCbkAi4Vn9k=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gettyimages-114166947-1-268128f97e5c415baede328c1fe32f55.jpg",
-    "text": "how many dog in the image"
+    "image": "https://justin-liang.com/tutorials/canny/images/10_final.jpg",
+    "text": "a young girl"
+}'
+
+curl --location 'http://localhost:8004/models/runwayml/stable-diffusion-v1-5' \
+--header 'Content-Type: application/json' \
+--data '{
+    "image": "https://justin-liang.com/tutorials/canny/images/1_original.jpg",
+    "text": "a red dog in the sea"
+}'
+
+curl --location 'http://localhost:8004/models/canny-control' \
+--header 'Content-Type: application/json' \
+--data '{
+    "image": "https://justin-liang.com/tutorials/canny/images/1_original.jpg"
+}'
+
+curl --location 'http://localhost:8004/models/espnet/kan-bayashi_ljspeech_vits' \
+--header 'Content-Type: application/json' \
+--data '{
+    "text": "i love you chole"
 }'
 
 # response

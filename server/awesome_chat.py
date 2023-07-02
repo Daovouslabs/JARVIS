@@ -25,6 +25,7 @@ from flask_cors import CORS, cross_origin
 from get_token_ids import get_token_ids_for_task_parsing, get_token_ids_for_choose_model, count_tokens, get_max_context_length
 from huggingface_hub.inference_api import InferenceApi
 from huggingface_hub.inference_api import ALL_TASKS
+from server.utils.aws_utils.s3_uilts import S3Client
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--config", type=str, default="configs/config.default.yaml")
@@ -164,6 +165,9 @@ elif "HUGGINGFACE_ACCESS_TOKEN" in os.environ and os.getenv("HUGGINGFACE_ACCESS_
     }
 else:
     raise ValueError(f"Incorrect HuggingFace token. Please check your {args.config} file.")
+
+s3_client = S3Client(config['s3']["bucket"])
+s3_domain = config['s3']["domain"]
 
 def convert_chat_to_completion(data):
     messages = data.pop('messages', [])
@@ -437,10 +441,12 @@ def huggingface_model_inference(model_id, data, task):
     if task == "text-to-image":
         inputs = data["text"]
         img = inference(inputs)
-        name = str(uuid.uuid4())[:4]
-        img.save(f"public/images/{name}.png")
-        result = {}
-        result["generated image"] = f"/images/{name}.png"
+        file_name = str(uuid.uuid4())[:4]
+        img.save(f"public/images/{file_name}.png")
+        s3_client.upload_file(
+            f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
+        )
+        result = {"generated image": c}
 
     if task == "image-segmentation":
         img_url = data["image"]
@@ -461,8 +467,11 @@ def huggingface_model_inference(model_id, data, task):
             image.paste(layer, (0, 0), mask)
         name = str(uuid.uuid4())[:4]
         image.save(f"public/images/{name}.jpg")
+        s3_client.upload_file(
+            f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
+        )
         result = {}
-        result["generated image"] = f"/images/{name}.jpg"
+        result["generated image"] = f"{s3_domain}/images/{name}.jpg"
         result["predicted"] = predicted
 
     if task == "object-detection":
@@ -482,8 +491,11 @@ def huggingface_model_inference(model_id, data, task):
             draw.text((box["xmin"]+5, box["ymin"]-15), label["label"], fill=color_map[label["label"]])
         name = str(uuid.uuid4())[:4]
         image.save(f"public/images/{name}.jpg")
+        s3_client.upload_file(
+            f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
+        )
         result = {}
-        result["generated image"] = f"/images/{name}.jpg"
+        result["generated image"] = f"{s3_domain}/images/{name}.jpg"
         result["predicted"] = predicted
 
     if task in ["image-classification"]:
@@ -508,7 +520,10 @@ def huggingface_model_inference(model_id, data, task):
         name = str(uuid.uuid4())[:4]
         with open(f"public/audios/{name}.flac", "wb") as f:
             f.write(response.content)
-        result = {"generated audio": f"/audios/{name}.flac"}
+        s3_client.upload_file(
+            f"public/audios/{name}.flac", object_name=f"public/audios/{name}.flac"
+        )
+        result = {"generated audio": f"{s3_domain}/audios/{name}.flac"}
     if task in ["automatic-speech-recognition", "audio-to-audio", "audio-classification"]:
         audio_url = data["audio"]
         audio_data = requests.get(audio_url, timeout=10).content
@@ -525,7 +540,10 @@ def huggingface_model_inference(model_id, data, task):
             audio = AudioSegment.from_file(BytesIO(content))
             name = str(uuid.uuid4())[:4]
             audio.export(f"public/audios/{name}.{type}", format=type)
-            result = {"generated audio": f"/audios/{name}.{type}"}
+        s3_client.upload_file(
+            f"public/audios/{name}.{type}", object_name=f"public/audios/{name}.{type}"
+        )
+        result = {"generated audio": f"{s3_domain}/audios/{name}.{type}"}
     return result
 
 def local_model_inference(model_id, data, task):
