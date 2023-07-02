@@ -1037,6 +1037,13 @@ def server():
     # CORS(app)
 
     app = FastAPI()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     app.mount("/", StaticFiles(directory="public"), name="static")
     # @cross_origin()
     # @app.route('/tasks', methods=['POST'])
@@ -1077,9 +1084,9 @@ def server():
     #     response = chat_huggingface(messages, api_key, api_type, api_endpoint)
     #     return jsonify(response)
 
-    @cross_origin()
+    # @cross_origin()
     @app.post('/models/{model_id}')
-    def models(model_id):
+    async def models(model_id):
         task = METADATAS.get(model_id, {}).get('pipeline_tag', 'unknown')
         hosted_on = "unknown"
         if model_id.endswith('-control') or model_id.startswith('lllyasviel/sd-controlnet'):
