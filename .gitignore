@@ -10,6 +10,7 @@ server/models_dev
 server/public/*
 !server/public/examples/
 server/public/examples/*
+!server/public/.well-known
 !server/public/examples/a.jpg
 !server/public/examples/b.jpg
 !server/public/examples/c.jpg
