@@ -1027,25 +1027,14 @@ def cli():
         messages.append({"role": "assistant", "content": answer["message"]})
 
 def server():
-    from fastapi.staticfiles import StaticFiles
-    from starlette.middleware.cors import CORSMiddleware
     http_listen = config["http_listen"]
     host = http_listen["host"]
     port = http_listen["port"]
 
-    # app = flask.Flask(__name__, static_folder="public", static_url_path="/")
-    # app.config['DEBUG'] = False
-    # CORS(app)
-
-    app = FastAPI()
-    # app.add_middleware(
-    #     CORSMiddleware,
-    #     allow_origins=["*"],
-    #     allow_credentials=True,
-    #     allow_methods=["*"],
-    #     allow_headers=["*"],
-    # )
-    app.mount("/", StaticFiles(directory="public"), name="static")
+    app = flask.Flask(__name__, static_folder="public", static_url_path="/")
+    app.config['DEBUG'] = False
+    CORS(app)
+    
     # @cross_origin()
     # @app.route('/tasks', methods=['POST'])
     # def tasks():
@@ -1085,9 +1074,9 @@ def server():
     #     response = chat_huggingface(messages, api_key, api_type, api_endpoint)
     #     return jsonify(response)
 
-    # @cross_origin()
-    @app.post('/models/{model_id:path}')
-    async def models(model_id):
+    @cross_origin()
+    @app.route('/models/<path:model_id>', methods=['POST'])
+    def models(model_id):
         task = METADATAS.get(model_id, {}).get('pipeline_tag', 'unknown')
         hosted_on = "unknown"
         if model_id.endswith('-control') or model_id.startswith('lllyasviel/sd-controlnet'):
@@ -1096,8 +1085,7 @@ def server():
         return jsonify(response)
 
     print("server running...")
-    # waitress.serve(app, host=host, port=port)
-    uvicorn.run(app, host=host, port=port)
+    waitress.serve(app, host=host, port=port)
 
 if __name__ == "__main__":
     if args.mode == "test":
