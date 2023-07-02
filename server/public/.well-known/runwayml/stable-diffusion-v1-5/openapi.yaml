@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Jarvis
+  version: 1.0.0
+  contact: {}
+paths:
+  /models/runwayml/stable-diffusion-v1-5:
+    post:
+      summary: Generate Image From User Input Text using stable-diffusion-v1-5
+      description: >-
+        useful when you want to generate an image from a user input text and
+        save it to a file. like: generate an image of an object or something, or
+        generate an image that includes some objects. The input to this tool
+        should be a string, representing the text used to generate image.
+      parameters: []
+      operationId: runwayml-stable-diffusion-v1-5
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+security: []
+servers:
+  - url: 'http://jarvis.daovous.xyz'
+    description: A API for connecting numerous AI models for solving complicated AI tasks
+components:
+  links: {}
+  callbacks: {}
+  schemas:
+    Query:
+      type: object
+      title: Query
+      properties:
+        text:
+          type: string
+          title: Text
+    Response:
+      type: object
+      title: Response
+      properties:
+        generated image: string
+        type: string
