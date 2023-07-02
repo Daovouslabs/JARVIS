@@ -26,6 +26,8 @@ from get_token_ids import get_token_ids_for_task_parsing, get_token_ids_for_choo
 from huggingface_hub.inference_api import InferenceApi
 from huggingface_hub.inference_api import ALL_TASKS
 from utils.aws_utils.s3_uilts import S3Client
+import uvicorn
+from fastapi import FastAPI
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--config", type=str, default="configs/config.default.yaml")
@@ -1025,14 +1027,17 @@ def cli():
         messages.append({"role": "assistant", "content": answer["message"]})
 
 def server():
+    from fastapi.staticfiles import StaticFiles
     http_listen = config["http_listen"]
     host = http_listen["host"]
     port = http_listen["port"]
 
-    app = flask.Flask(__name__, static_folder="public", static_url_path="/")
-    app.config['DEBUG'] = False
-    CORS(app)
-    
+    # app = flask.Flask(__name__, static_folder="public", static_url_path="/")
+    # app.config['DEBUG'] = False
+    # CORS(app)
+
+    app = FastAPI()
+    app.mount("/", StaticFiles(directory="public"), name="static")
     # @cross_origin()
     # @app.route('/tasks', methods=['POST'])
     # def tasks():
@@ -1083,7 +1088,8 @@ def server():
         return jsonify(response)
 
     print("server running...")
-    waitress.serve(app, host=host, port=port)
+    # waitress.serve(app, host=host, port=port)
+    uvicorn.run(app, host=host, port=port, reload=True)
 
 if __name__ == "__main__":
     if args.mode == "test":
