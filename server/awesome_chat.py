@@ -1089,7 +1089,7 @@ def server():
 
     print("server running...")
     # waitress.serve(app, host=host, port=port)
-    uvicorn.run(app, host=host, port=port, reload=True)
+    uvicorn.run(app, host=host, port=port)
 
 if __name__ == "__main__":
     if args.mode == "test":
