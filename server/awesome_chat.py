@@ -171,6 +171,7 @@ else:
 
 s3_client = S3Client(config['s3']["bucket"])
 s3_domain = config['s3']["domain"]
+daovous_domain = config['daovous_domain']
 
 def convert_chat_to_completion(data):
     messages = data.pop('messages', [])
@@ -449,7 +450,7 @@ def huggingface_model_inference(model_id, data, task):
         # s3_client.upload_file(
         #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
         # )
-        result = {"generated image": f"/images/{file_name}.png"}
+        result = {"generated image": f"{daovous_domain}/images/{file_name}.png"}
 
     if task == "image-segmentation":
         img_url = data["image"]
@@ -474,7 +475,7 @@ def huggingface_model_inference(model_id, data, task):
         #     f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
         # )
         result = {}
-        result["generated image"] = f"/images/{name}.jpg"
+        result["generated image"] = f"{daovous_domain}/images/{name}.jpg"
         result["predicted"] = predicted
 
     if task == "object-detection":
@@ -498,7 +499,7 @@ def huggingface_model_inference(model_id, data, task):
         #     f"public/images/{name}.jpg", object_name=f"public/images/{name}.jpg"
         # )
         result = {}
-        result["generated image"] = f"/images/{name}.jpg"
+        result["generated image"] = f"{daovous_domain}/images/{name}.jpg"
         result["predicted"] = predicted
 
     if task in ["image-classification"]:
@@ -526,7 +527,7 @@ def huggingface_model_inference(model_id, data, task):
         # s3_client.upload_file(
         #     f"public/audios/{name}.flac", object_name=f"public/audios/{name}.flac"
         # )
-        result = {"generated audio": f"/audios/{name}.flac"}
+        result = {"generated audio": f"{daovous_domain}/audios/{name}.flac"}
     if task in ["automatic-speech-recognition", "audio-to-audio", "audio-classification"]:
         audio_url = data["audio"]
         audio_data = requests.get(audio_url, timeout=10).content
@@ -546,7 +547,7 @@ def huggingface_model_inference(model_id, data, task):
         # s3_client.upload_file(
         #     f"public/audios/{name}.{type}", object_name=f"public/audios/{name}.{type}"
         # )
-        result = {"generated audio": f"/audios/{name}.{type}"}
+        result = {"generated audio": f"{daovous_domain}/audios/{name}.{type}"}
     return result
 
 def local_model_inference(model_id, data, task):
@@ -631,7 +632,7 @@ def local_model_inference(model_id, data, task):
         name = str(uuid.uuid4())[:4]
         image.save(f"public/images/{name}.jpg")
         results = {}
-        results["generated image"] = f"/images/{name}.jpg"
+        results["generated image"] = f"{daovous_domain}/images/{name}.jpg"
         results["predicted"] = predicted
         return results
     if task in ["image-classification", "image-to-text", "document-question-answering", "visual-question-answering"]:

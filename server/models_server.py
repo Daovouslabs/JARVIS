@@ -81,6 +81,7 @@ local_fold = "models"
 
 s3_client = S3Client(config['s3']["bucket"])
 s3_domain = config['s3']["domain"]
+daovous_domain = config['daovous_domain']
 
 def load_pipes(local_deployment):
     other_pipes = {}
@@ -410,7 +411,7 @@ def models(model_id):
             video_path = export_to_video(video_frames)
             file_name = str(uuid.uuid4())[:4]
             os.system(f"LD_LIBRARY_PATH=/usr/local/lib /usr/local/bin/ffmpeg -i {video_path} -vcodec libx264 public/videos/{file_name}.mp4")
-            result = {"path": f"/videos/{file_name}.mp4"}
+            result = {"path": f"{daovous_domain}/videos/{file_name}.mp4"}
             # s3_client.upload_file(
             #     'public/videos/{file_name}.mp4', object_name='public/videos/{file_name}.mp4')
             # result = {"path": f"{s3_domain}/videos/{file_name}.mp4"}
@@ -426,7 +427,7 @@ def models(model_id):
             print("finish")
             file_name = str(uuid.uuid4())[:4]
             out_image.save(f"public/images/{file_name}.png")
-            result = {"path": f"/images/{file_name}.png"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.png"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.png", object_name=f"public/images/{file_name}.png")
             
@@ -442,7 +443,7 @@ def models(model_id):
                 control = pipe(image)
             file_name = str(uuid.uuid4())[:4]
             control.save(f"public/images/{file_name}.png")
-            result = {"path": f"/images/{file_name}.png"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.png"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.png", object_name=f"public/images/{file_name}.png")
             # result = {"path": f"{s3_domain}/images/{file_name}.png"}
@@ -467,7 +468,7 @@ def models(model_id):
             inp = tform(im).to(pipes[model_id]["device"]).unsqueeze(0)
             out = pipe(inp, guidance_scale=3)
             out["images"][0].save(f"public/images/{file_name}.jpg")
-            result = {"path": f"/images/{file_name}.jpg"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
@@ -507,7 +508,7 @@ def models(model_id):
             text = request.get_json()["text"]
             out = pipe(prompt=text)
             out["images"][0].save(f"public/images/{file_name}.jpg")
-            result = {"path": f"/images/{file_name}.jpg"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
@@ -537,7 +538,7 @@ def models(model_id):
             image = output['depth']
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
-            result = {"path": f"/images/{file_name}.jpg"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
@@ -560,7 +561,7 @@ def models(model_id):
             image = Image.fromarray(formatted)
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
-            result = {"path": f"/images/{file_name}.jpg"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
@@ -574,7 +575,7 @@ def models(model_id):
             sf.write(f"public/audios/{file_name}.wav",
                      wav.cpu().numpy(), pipe.fs, "PCM_16")
 
-            result = {"path": f"/audios/{file_name}.wav"}
+            result = {"path": f"{daovous_domain}/audios/{file_name}.wav"}
             # s3_client.upload_file(
             #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
             # )
@@ -589,7 +590,7 @@ def models(model_id):
             speech = pipe.generate_speech(inputs["input_ids"].to(pipes[model_id]["device"]), speaker_embeddings, vocoder=pipes[model_id]["vocoder"])
             file_name = str(uuid.uuid4())[:4]
             sf.write(f"public/audios/{file_name}.wav", speech.cpu().numpy(), samplerate=16000)
-            result = {"path": f"/audios/{file_name}.wav"}
+            result = {"path": f"{daovous_domain}/audios/{file_name}.wav"}
             # s3_client.upload_file(
             #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
             # )
@@ -609,7 +610,7 @@ def models(model_id):
             file_name = str(uuid.uuid4())[:4]
             sf.write(f"public/audios/{file_name}.wav", result_wav.cpu().squeeze().numpy(), sr)
 
-            result = {"path": f"/audios/{file_name}.wav"}
+            result = {"path": f"{daovous_domain}/audios/{file_name}.wav"}
             # s3_client.upload_file(
             #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
             # )
@@ -626,7 +627,7 @@ def models(model_id):
             file_name = str(uuid.uuid4())[:4]
             sf.write(f"public/audios/{file_name}.wav", speech.cpu().numpy(), samplerate=16000)
 
-            result = {"path": f"/audios/{file_name}.wav"}
+            result = {"path": f"{daovous_domain}/audios/{file_name}.wav"}
             # s3_client.upload_file(
             #     f"public/audios/{file_name}.wav", object_name=f"public/audios/{file_name}.wav"
             # )
@@ -650,7 +651,7 @@ def models(model_id):
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
 
-            result = {"path": f"/images/{file_name}.jpg"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
@@ -666,7 +667,7 @@ def models(model_id):
             file_name = str(uuid.uuid4())[:4]
             predicted_panoptic_map.save(f"public/images/{file_name}.jpg")
 
-            result = {"path": f"/images/{file_name}.jpg"}
+            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
