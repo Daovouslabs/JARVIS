@@ -8,8 +8,8 @@ paths:
     post:
       summary: Generate Image From User Input Text using stable-diffusion-v1-5
       description: >-
-        useful when you want to generate an image from a user input text.
-        like: generate an image of an object or something, or
+        useful when you want to generate an image from a user input text and
+        save it to a file. like: generate an image of an object or something, or
         generate an image that includes some objects. The input to this tool
         should be a string, representing the text used to generate image.
       parameters: []
@@ -37,14 +37,11 @@ components:
   schemas:
     Query:
       type: object
-      title: Query
       properties:
         text:
           type: string
-          title: Text
     Response:
       type: object
-      title: Response
       properties:
-        generated image: string
-        type: string
+        generated image:
+          type: string
