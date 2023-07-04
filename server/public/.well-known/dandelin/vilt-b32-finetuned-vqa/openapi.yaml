@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Jarvis
+  version: 1.0.0
+  contact: {}
+paths:
+  /models/dandelin/vilt-b32-finetuned-vqa:
+    post:
+      summary: Answer Question About The Image
+      description: useful when you need an answer for a question based on an image.
+      parameters: []
+      operationId: dandelin-vilt-b32-finetuned-vqa
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      tags:
+        - image-to-image-endpoint
+        - scribble-control
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+security: []
+servers:
+  - url: 'http://jarvis.daovous.xyz'
+    description: A API for connecting numerous AI models for solving complicated AI tasks
+components:
+  links: {}
+  callbacks: {}
+  schemas:
+    Query:
+      type: object
+      properties:
+        image:
+          type: string
+        text:
+          type: string
+    Response:
+      type: object
+      properties:
+        predicted:
+          type: string
+tags: []

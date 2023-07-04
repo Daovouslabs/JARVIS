@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "ImageSegmentation",
+	"name_for_human": "Image Segmentation",
+	"description_for_human": "useful when you want to segment all the part of the image",
+	"description_for_model": "useful when you want to segment all the part of the image, but not segment a certain object. like: segment all the object in this image, or generate segmentations on this image, or segment the image, or perform segmentation on this image, or segment all the object in this image. The input to this tool should be a string, representing the image path or url",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/facebook/detr-resnet-50-panoptic/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

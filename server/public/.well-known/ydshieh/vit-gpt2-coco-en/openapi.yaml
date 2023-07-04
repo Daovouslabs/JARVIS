@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Jarvis
+  version: 1.0.0
+  contact: {}
+paths:
+  /models/ydshieh/vit-gpt2-coco-en:
+    post:
+      summary: Generate description from image
+      description: useful when you want to know what is inside the photo.
+      parameters: []
+      operationId: ydshieh-vit-gpt2-coco-en
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      tags:
+        - Image Captioning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+security: []
+servers:
+  - url: 'http://jarvis.daovous.xyz'
+    description: A API for connecting numerous AI models for solving complicated AI tasks
+components:
+  links: {}
+  callbacks: {}
+  schemas:
+    Query:
+      type: object
+      properties:
+        image:
+          type: string
+    Response:
+      type: object
+      properties:
+        text:
+          type: string
+tags: []

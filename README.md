@@ -97,10 +97,9 @@ curl --location 'http://localhost:8004/models/lllyasviel/sd-controlnet-canny' \
     "text": "a young girl"
 }'
 
-curl --location 'http://localhost:8004/models/runwayml/stable-diffusion-v1-5' \
+curl --location 'http://jarvis.daovous.xyz/models/runwayml/stable-diffusion-v1-5' \
 --header 'Content-Type: application/json' \
 --data '{
-    "image": "https://justin-liang.com/tutorials/canny/images/1_original.jpg",
     "text": "a red dog in the sea"
 }'
 

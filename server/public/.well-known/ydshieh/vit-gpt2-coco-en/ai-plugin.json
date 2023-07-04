@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "Image2Text",
+	"name_for_human": "Get Photo Description",
+	"description_for_human": "Generate description from image",
+	"description_for_model": "useful when you want to know what is inside the photo. receives image path or url as input. The input to this tool should be a string, representing the image path or url. ",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/ydshieh/vit-gpt2-coco-en/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

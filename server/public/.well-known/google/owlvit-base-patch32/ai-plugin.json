@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "Object Detection",
+	"name_for_human": "Object Detection",
+	"description_for_human": "Object detection using OWL-ViT",
+	"description_for_model": "useful when you want to do zero-shot text-conditioned object detection, input is an image path or url to object detection.",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/google/owlvit-base-patch32/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

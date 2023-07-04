@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: Jarvis
+  version: 1.0.0
+  contact: {}
+paths:
+  /models/lllyasviel/sd-controlnet-mlsd:
+    post:
+      summary: Generate Image Condition On Line Image
+      description: >-
+        useful when you want to generate a new real image from both the user
+        description and a straight line image.
+      parameters: []
+      operationId: lllyasviel-sd-controlnet-mlsd
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      tags:
+        - text-to-image-endpoint
+        - sd-controlnet-mlsd
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+security: []
+servers:
+  - url: 'http://jarvis.daovous.xyz'
+    description: A API for connecting numerous AI models for solving complicated AI tasks
+components:
+  links: {}
+  callbacks: {}
+  schemas:
+    Query:
+      type: object
+      properties:
+        text:
+          type: string
+        image:
+          type: string
+    Response:
+      type: object
+      properties:
+        generated image:
+          type: string
+tags: []

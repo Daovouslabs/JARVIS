@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Jarvis
+  version: 1.0.0
+  contact: {}
+paths:
+  /models/google/owlvit-base-patch32:
+    post:
+      summary: Object Detection
+      description: useful when you want to do zero-shot text-conditioned object detection
+      parameters: []
+      operationId: google-owlvit-base-patch32
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      tags:
+        - Object Detection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+security: []
+servers:
+  - url: 'http://jarvis.daovous.xyz'
+    description: A API for connecting numerous AI models for solving complicated AI tasks
+components:
+  links: {}
+  callbacks: {}
+  schemas:
+    Query:
+      type: object
+      properties:
+        image:
+          type: string
+    Response:
+      type: object
+      properties:
+        generated image:
+          type: string
+tags: []

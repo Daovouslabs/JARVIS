@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Jarvis
+  version: 1.0.0
+  contact: {}
+paths:
+  /models/openai/whisper-base:
+    post:
+      summary: automatic speech recognition using openai/whisper-base
+      description: >-
+        useful when you want to automatic speech recognition from a user input
+        audio using openai/whisper-base
+      parameters: []
+      operationId: openai-whisper-base
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      tags:
+        - automatic speech recognition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Query'
+security: []
+servers:
+  - url: 'http://jarvis.daovous.xyz'
+    description: A API for connecting numerous AI models for solving complicated AI tasks
+components:
+  links: {}
+  callbacks: {}
+  schemas:
+    Query:
+      type: object
+      properties:
+        audio:
+          type: string
+    Response:
+      type: object
+      properties:
+        text:
+          type: string
+tags: []

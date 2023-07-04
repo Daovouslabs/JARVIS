@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "SegText2Image",
+	"name_for_human": "Generate Image Condition On Segmentations",
+	"description_for_human": "useful when you want to generate a new real image from both the user description and segmentations.",
+	"description_for_model": "useful when you want to generate a new real image from both the user description and segmentations. like: generate a real image of a object or something from this segmentation image, or generate a new real image of a object or something from these segmentations. The input to this tool should be image path and the user description ",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/lllyasviel/sd-controlnet-seg/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

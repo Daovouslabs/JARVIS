@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "PoseText2Image",
+	"name_for_human": "Generate Image Condition On Pose Image",
+	"description_for_human": "useful when you want to generate a new real image from both the user description and a human pose image.",
+	"description_for_model": "useful when you want to generate a new real image from both the user description and a human pose image. like: generate a real image of a human from this human pose image, or generate a new real image of a human from this pose. The input to this tool should be the image_path and the user description",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/lllyasviel/sd-controlnet-openpose/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

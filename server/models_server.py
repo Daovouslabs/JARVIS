@@ -83,6 +83,11 @@ s3_client = S3Client(config['s3']["bucket"])
 s3_domain = config['s3']["domain"]
 daovous_domain = config['daovous_domain']
 
+# prompt
+a_prompt = config.get('image_prompt', {}).get(
+    'a_prompt', 'best quality, extremely detailed')
+n_prompt = config.get('image_prompt', {}).get('n_prompt', 'longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality')
+
 def load_pipes(local_deployment):
     other_pipes = {}
     standard_pipes = {}
@@ -208,7 +213,7 @@ def load_pipes(local_deployment):
             #     "device": device
             # },
             "Intel/dpt-large": {
-                "model": pipeline(task="depth-estimation", model=f"{local_fold}/Intel/dpt-large"), 
+                "model": pipeline(task="c", model=f"{local_fold}/Intel/dpt-large"), 
                 "device": device
             },
             # "microsoft/beit-base-patch16-224-pt22k-ft22k": {
@@ -423,7 +428,10 @@ def models(model_id):
             pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
             control_image = load_image(request.get_json()["img_url"])
             # generator = torch.manual_seed(66)
-            out_image: Image = pipe(request.get_json()["text"], num_inference_steps=20, image=control_image).images[0]
+            text = request.get_json()["text"]
+            prompt = text + ', ' + a_prompt
+            out_image: Image = pipe(
+                prompt, num_inference_steps=20, image=control_image, negative_prompt=n_prompt).images[0]
             print("finish")
             file_name = str(uuid.uuid4())[:4]
             out_image.save(f"public/images/{file_name}.png")
@@ -506,7 +514,8 @@ def models(model_id):
         if model_id == "runwayml/stable-diffusion-v1-5":
             file_name = str(uuid.uuid4())[:4]
             text = request.get_json()["text"]
-            out = pipe(prompt=text)
+            prompt = text + ', ' + a_prompt
+            out = pipe(prompt=text, negative_prompt=n_prompt)
             out["images"][0].save(f"public/images/{file_name}.jpg")
             result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
             # s3_client.upload_file(

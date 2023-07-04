@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "VisionDocQA",
+	"name_for_human": "Answer Question About The Document Image",
+	"description_for_human": "useful when you need an answer for a question based on a document image.",
+	"description_for_model": "useful when you need an answer for a question based on a document image. like: What is the purchase amount? What is the invoice number?.",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/impira/layoutlm-document-qa/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

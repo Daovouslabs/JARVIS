@@ -547,7 +547,7 @@ def huggingface_model_inference(model_id, data, task):
         # s3_client.upload_file(
         #     f"public/audios/{name}.{type}", object_name=f"public/audios/{name}.{type}"
         # )
-        result = {"generated audio": f"{daovous_domain}/audios/{name}.{type}"}
+            result = {"generated audio": f"{daovous_domain}/audios/{name}.{type}"}
     return result
 
 def local_model_inference(model_id, data, task):

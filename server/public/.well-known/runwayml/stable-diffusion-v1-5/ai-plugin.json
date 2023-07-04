@@ -3,7 +3,7 @@
 	"name_for_model": "Stable diffusion 1.5",
 	"name_for_human": "Stable diffusion 1.5",
 	"description_for_human": "Generate Image From User Input Text Using Stable diffusion 1.5",
-	"description_for_model": "useful when you want to generate an image from a user input text and save it to a file. like: generate an image of an object or something, or generate an image that includes some objects. The input to this tool should be a string, representing the text used to generate image. ",
+	"description_for_model": "useful when you want to generate an image from a user input text. like: generate an image of an object or something, or generate an image that includes some objects. The input to this tool should be a string, representing the text used to generate image. ",
 	"api": {
 		"type": "openapi",
 		"url": "http://jarvis.daovous.xyz/.well-known/runwayml/stable-diffusion-v1-5/openapi.yaml",

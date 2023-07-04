@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "automatic-speech-recognition",
+	"name_for_human": "automatic-speech-recognition",
+	"description_for_human": "automatic speech recognition using openai/whisper-base",
+	"description_for_model": "useful when you want to automatic speech recognition from a user input audio using openai/whisper-base. The input to this tool should be a string, representing the audio used to generate text. ",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/openai/whisper-base/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}

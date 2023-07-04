@@ -1,0 +1,18 @@
+{
+	"schema_version": "v1",
+	"name_for_model": "VisualQA",
+	"name_for_human": "Answer Question About The Image",
+	"description_for_human": "useful when you need an answer for a question based on an image.",
+	"description_for_model": "useful when you need an answer for a question based on an image. like: what is the background color of the last image, how many cats in this figure, what is in this figure.",
+	"api": {
+		"type": "openapi",
+		"url": "http://jarvis.daovous.xyz/.well-known/dandelin/vilt-b32-finetuned-vqa/openapi.yaml",
+		"has_user_authentication": false
+	},
+	"auth": {
+		"type": "none"
+	},
+	"logo_url": "",
+	"contact_email": "",
+	"legal_info_url": ""
+}
