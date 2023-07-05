@@ -7,7 +7,7 @@ paths:
   /models/facebook/detr-resnet-50-panoptic:
     post:
       summary: Image Segmentation
-      description: useful when you want to segment all the part of the image
+      description: useful when you want to segment all the part of the image. The input to this tool should be a string, representing the image path or url.
       parameters: []
       operationId: facebook-detr-resnet-50-panoptic
       responses:

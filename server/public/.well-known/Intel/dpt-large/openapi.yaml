@@ -9,7 +9,7 @@ paths:
       summary: Image depth estimation using Intel/dpt-large
       description: >-
         useful when you want to do vision depth estimation for an image using
-        Intel/dpt-large
+        Intel/dpt-large. The input to this tool should be a string, representing the image url used to depth estimation.
       parameters: []
       operationId: Intel-dpt-large
       responses:

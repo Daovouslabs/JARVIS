@@ -7,7 +7,7 @@ paths:
   /models/canny-control:
     post:
       summary: Edge Detection On Image
-      description: useful when you want to detect the edge of the image
+      description: useful when you want to detect the edge of the image. The input to this tool should be a string, representing the image path or url
       parameters: []
       operationId: canny-control
       responses:

@@ -7,7 +7,7 @@ paths:
   /models/google/owlvit-base-patch32:
     post:
       summary: Object Detection
-      description: useful when you want to do zero-shot text-conditioned object detection
+      description: useful when you want to do zero-shot text-conditioned object detection, input is an image path or url to object detection.
       parameters: []
       operationId: google-owlvit-base-patch32
       responses:

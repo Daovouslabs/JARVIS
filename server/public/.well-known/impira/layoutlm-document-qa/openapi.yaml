@@ -7,7 +7,7 @@ paths:
   /models/impira/layoutlm-document-qa:
     post:
       summary: Answer Question About The Document Image
-      description: useful when you need an answer for a question based on a document image.
+      description: useful when you need an answer for a question based on a document image. The inputs include a document image path and a question.
       parameters: []
       operationId: impira-layoutlm-document-qa
       responses:

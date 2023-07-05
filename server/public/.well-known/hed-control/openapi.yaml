@@ -7,7 +7,7 @@ paths:
   /models/hed-control:
     post:
       summary: Hed Detection On Image
-      description: useful when you want to detect the soft hed boundary of the image.
+      description: useful when you want to detect the soft hed boundary of the image. receives image path or url as input. The input to this tool should be a string, representing the image path or url. 
       parameters: []
       operationId: hed-control
       responses:
