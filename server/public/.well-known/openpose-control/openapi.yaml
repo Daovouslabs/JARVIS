@@ -7,7 +7,7 @@ paths:
   /models/openpose-control:
     post:
       summary: Pose Detection On Image
-      description: useful when you want to detect the human pose of the image. like: generate human poses of this image, or generate a pose image from this image. The input to this tool should be a string, representing the image path or url
+      description: useful when you want to detect the human pose of the image. The input to this tool should be a string, representing the image path or url
       parameters: []
       operationId: openpose-control
       responses:
