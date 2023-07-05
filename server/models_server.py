@@ -450,6 +450,7 @@ def models(model_id):
             else:
                 control = pipe(image)
             file_name = str(uuid.uuid4())[:4]
+            print(control)
             control.save(f"public/images/{file_name}.png")
             result = {"path": f"{daovous_domain}/images/{file_name}.png"}
             # s3_client.upload_file(

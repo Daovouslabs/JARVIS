@@ -103,7 +103,7 @@ curl --location 'http://jarvis.daovous.xyz/models/runwayml/stable-diffusion-v1-5
     "text": "a red dog in the sea"
 }'
 
-curl --location 'http://localhost:8004/models/canny-control' \
+curl --location 'http://localhost:8004/models/midas-control' \
 --header 'Content-Type: application/json' \
 --data '{
     "image": "https://justin-liang.com/tutorials/canny/images/1_original.jpg"
