@@ -7,7 +7,7 @@ paths:
   /models/scribble-control:
     post:
       summary: Sketch Detection On Image
-      description: useful when you want to generate a scribble of the image. like: generate a scribble of this image, or generate a sketch from this image, detect the sketch from this image. The input to this tool should be a string, representing the image path or url.
+      description: useful when you want to generate a scribble of the image. The input to this tool should be a string, representing the image path or url.
       parameters: []
       operationId: scribble-control
       responses:
