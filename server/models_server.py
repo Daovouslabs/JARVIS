@@ -213,7 +213,7 @@ def load_pipes(local_deployment):
             #     "device": device
             # },
             "Intel/dpt-large": {
-                "model": pipeline(task="c", model=f"{local_fold}/Intel/dpt-large"), 
+                "model": pipeline(task="depth-estimation", model=f"{local_fold}/Intel/dpt-large"),
                 "device": device
             },
             # "microsoft/beit-base-patch16-224-pt22k-ft22k": {
