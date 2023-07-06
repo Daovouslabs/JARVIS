@@ -3,7 +3,7 @@
 	"name_for_model": "Sketch Detection On Image",
 	"name_for_human": "Sketch Detection On Image",
 	"description_for_human": "useful when you want to generate a scribble of the image.",
-	"description_for_model": "useful when you want to generate a scribble of the image. like: generate a scribble of this image, or generate a sketch from this image, detect the sketch from this image. The input to this tool should be a string, representing the image path or url",
+	"description_for_model": "useful when you want to generate a scribble of the image. like: generate a scribble of this image, or generate a sketch from this image, detect the sketch from this image. The input to this tool should be a string, representing the image path or url to generate scribble image",
 	"api": {
 		"type": "openapi",
 		"url": "http://jarvis.daovous.xyz/.well-known/scribble-control/openapi.yaml",

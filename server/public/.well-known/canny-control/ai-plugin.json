@@ -3,7 +3,7 @@
 	"name_for_model": "Edge Detection On Image",
 	"name_for_human": "Edge Detection On Image",
 	"description_for_human": "useful when you want to detect the edge of the image",
-	"description_for_model": "useful when you want to detect the edge of the image. like: detect the edges of this image, or canny detection on image, or perform edge detection on this image, or detect the canny image of this image. The input to this tool should be a string, representing the image path or url",
+	"description_for_model": "useful when you want to detect the edge of the image. like: detect the edges of this image, or canny detection on image, or perform edge detection on this image, or detect the canny image of this image. The input to this tool should be a string, representing the image path or url to generate edge image.",
 	"api": {
 		"type": "openapi",
 		"url": "http://jarvis.daovous.xyz/.well-known/canny-control/openapi.yaml",

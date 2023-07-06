@@ -3,7 +3,7 @@
 	"name_for_model": "Image2Text",
 	"name_for_human": "Get Photo Description",
 	"description_for_human": "Generate description from image",
-	"description_for_model": "useful when you want to do image captioning, or generate description from image, which convert image to text. receives image path or url as input. The input to this tool should be a string, representing the image path or url. ",
+	"description_for_model": "useful when you want to do image captioning, or generate description from image, which convert image to text. receives image path or url as input. The input to this tool should be a string, representing the image path or url to generate description. ",
 	"api": {
 		"type": "openapi",
 		"url": "http://jarvis.daovous.xyz/.well-known/ydshieh/vit-gpt2-coco-en/openapi.yaml",

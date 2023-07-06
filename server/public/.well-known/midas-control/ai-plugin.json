@@ -3,7 +3,7 @@
 	"name_for_model": "Predict Depth On Image",
 	"name_for_human": "Predict Depth On Image",
 	"description_for_human": "useful when you want to detect depth of the image.",
-	"description_for_model": "useful when you want to detect depth of the image. like: generate the depth from this image, or detect the depth map on this image, or predict the depth for this image. The input to this tool should be a string, representing the image path or url",
+	"description_for_model": "useful when you want to detect depth of the image. like: generate the depth from this image, or detect the depth map on this image, or predict the depth for this image. The input to this tool should be a string, representing the image path or url to generate depth image",
 	"api": {
 		"type": "openapi",
 		"url": "http://jarvis.daovous.xyz/.well-known/midas-control/openapi.yaml",

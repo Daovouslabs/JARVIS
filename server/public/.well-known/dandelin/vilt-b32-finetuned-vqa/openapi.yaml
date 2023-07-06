@@ -7,7 +7,7 @@ paths:
   /models/dandelin/vilt-b32-finetuned-vqa:
     post:
       summary: Answer Question About The Image
-      description: useful when you need an answer for a question based on an image. The two inputs include a image path and a question.
+      description: useful when you need an answer for a question based on an image. The two inputs include a image url and a question.
       parameters: []
       operationId: dandelin-vilt-b32-finetuned-vqa
       responses:

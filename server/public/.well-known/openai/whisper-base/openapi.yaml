@@ -7,9 +7,7 @@ paths:
   /models/openai/whisper-base:
     post:
       summary: automatic speech recognition using openai/whisper-base
-      description: >-
-        useful when you want to automatic speech recognition from a user input
-        audio using openai/whisper-base
+      description: useful when you want to automatic speech recognition from a user input audio using openai/whisper-base. The input to this tool should be a string, representing the audio url used to generate text.
       parameters: []
       operationId: openai-whisper-base
       responses:

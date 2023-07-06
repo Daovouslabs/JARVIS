@@ -7,7 +7,7 @@ paths:
   /models/ydshieh/vit-gpt2-coco-en:
     post:
       summary: Generate description from image
-      description: useful when you want to know what is inside the photo.
+      description: useful when you want to do image captioning, or generate description from image, which convert image to text. receives image path or url as input. The input to this tool should be a string, representing the image path or url to generate description.
       parameters: []
       operationId: ydshieh-vit-gpt2-coco-en
       responses:
