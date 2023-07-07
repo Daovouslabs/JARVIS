@@ -90,11 +90,11 @@ For example:
 
 ```bash
 # request
-curl --location 'http://localhost:8004/models/lllyasviel/sd-controlnet-canny' \
+curl --location 'http://localhost:8004/models/impira/layoutlm-document-qa' \
 --header 'Content-Type: application/json' \
 --data '{
-    "image": "https://justin-liang.com/tutorials/canny/images/10_final.jpg",
-    "text": "a young girl"
+    "image": "http://jarvis.daovous.xyz/images/invoice.png",
+    "text": "What is the invoice number?"
 }'
 
 curl --location 'http://jarvis.daovous.xyz/models/runwayml/stable-diffusion-v1-5' \
