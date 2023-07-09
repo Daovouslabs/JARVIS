@@ -27,7 +27,7 @@ paths:
               $ref: '#/components/schemas/Query'
 security: []
 servers:
-  - url: 'http://jarvis.daovous.xyz'
+  - url: 'https://jarvis.daovous.xyz'
     description: A API for connecting numerous AI models for solving complicated AI tasks
 components:
   links: {}

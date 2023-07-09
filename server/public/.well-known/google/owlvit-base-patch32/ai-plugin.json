@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to do zero-shot text-conditioned object detection, input is an image path or url to object detection.",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/google/owlvit-base-patch32/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/google/owlvit-base-patch32/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

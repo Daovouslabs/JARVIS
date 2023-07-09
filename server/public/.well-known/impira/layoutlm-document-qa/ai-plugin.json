@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you need an answer for a question based on a document image. like: What is the purchase amount? What is the invoice number?. The two inputs include a image url and a question.",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/impira/layoutlm-document-qa/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/impira/layoutlm-document-qa/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

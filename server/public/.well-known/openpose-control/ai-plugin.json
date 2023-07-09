@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to detect the human pose of the image. like: generate human poses of this image, or generate a pose image from this image. The input to this tool should be a string, representing the image path or url to generate a pose image",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/openpose-control/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/openpose-control/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

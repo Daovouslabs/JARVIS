@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to do vision depth estimation for an image using Intel/dpt-large. The input to this tool should be a string, representing the image url used to depth estimation.",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/Intel/dpt-large/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/Intel/dpt-large/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

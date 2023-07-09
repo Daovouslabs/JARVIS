@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to automatic speech recognition from a user input audio using openai/whisper-base. The input to this tool should be a string, representing the audio url used to generate text. ",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/openai/whisper-base/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/openai/whisper-base/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

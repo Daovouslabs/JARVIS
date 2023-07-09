@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to generate a scribble of the image. like: generate a scribble of this image, or generate a sketch from this image, detect the sketch from this image. The input to this tool should be a string, representing the image path or url to generate scribble image",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/scribble-control/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/scribble-control/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

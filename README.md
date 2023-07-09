@@ -109,7 +109,7 @@ curl --location 'http://localhost:8004/models/openpose-control' \
     "image": "https://justin-liang.com/tutorials/canny/images/1_original.jpg"
 }'
 
-curl --location 'http://localhost:8004/models/espnet/kan-bayashi_ljspeech_vits' \
+curl --location 'https://jarvis.daovous.xyz/models/espnet/kan-bayashi_ljspeech_vits' \
 --header 'Content-Type: application/json' \
 --data '{
     "text": "i love you chole"

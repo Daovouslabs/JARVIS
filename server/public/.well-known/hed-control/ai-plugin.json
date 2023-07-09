@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to detect the soft hed boundary of the image. like: detect the soft hed boundary of this image, or hed boundary detection on image, or perform hed boundary detection on this image, or detect soft hed boundary image of this image. The input to this tool should be a string, representing the image path or url to generate soft hed boundary image.",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/hed-control/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/hed-control/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

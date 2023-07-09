@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you need an answer for a question based on an image. like: what is the background color of the last image, how many cats in this figure, what is in this figure. The two inputs include a image url and a question.",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/dandelin/vilt-b32-finetuned-vqa/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/dandelin/vilt-b32-finetuned-vqa/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

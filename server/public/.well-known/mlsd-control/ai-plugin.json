@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to detect the straight line of the image. like: detect the straight lines of this image, or straight line detection on image, or perform straight line detection on this image, or detect the straight line image of this image. The input to this tool should be a string, representing the image path or url to generate line image.",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/mlsd-control/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/mlsd-control/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {

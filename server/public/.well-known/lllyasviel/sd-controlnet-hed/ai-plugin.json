@@ -6,7 +6,7 @@
 	"description_for_model": "useful when you want to generate a new real image from both the user description and a soft hed boundary image. like: generate a real image of a object or something from this soft hed boundary image, or generate a new real image of a object or something from this hed boundary. The input to this tool should be the image_path and the user description",
 	"api": {
 		"type": "openapi",
-		"url": "http://jarvis.daovous.xyz/.well-known/lllyasviel/sd-controlnet-hed/openapi.yaml",
+		"url": "https://jarvis.daovous.xyz/.well-known/lllyasviel/sd-controlnet-hed/openapi.yaml",
 		"has_user_authentication": false
 	},
 	"auth": {
