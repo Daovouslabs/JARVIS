@@ -19,7 +19,7 @@ proxy: # optional: your proxy server "http://ip:port"
 s3:
   domain: https://daovousai.s3.ap-east-1.amazonaws.com/public
   bucket: daovousai
-daovous_domain: http://jarvis.daovous.xyz
+daovous_domain: https://jarvis.daovous.xyz
 http_listen:
   host: 0.0.0.0 # if you use web as the client, please set `http://{LAN_IP_of_the_server}:{port}/` to `BASE_URL` of `web/src/config/index.ts`.
   port: 8004

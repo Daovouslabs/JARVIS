@@ -44,6 +44,6 @@ components:
     Response:
       type: object
       properties:
-        predicted:
+        answer:
           type: string
 tags: []
