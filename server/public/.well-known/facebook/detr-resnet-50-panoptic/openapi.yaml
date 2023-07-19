@@ -43,4 +43,6 @@ components:
       properties:
         generated image:
           type: string
+        labels:
+          type: list
 tags: []

@@ -650,21 +650,22 @@ def models(model_id):
             segments = pipe(request.get_json()["img_url"])
             image = load_image(request.get_json()["img_url"])
 
-            print(segments)
-
             colors = []
             for i in range(len(segments)):
                 colors.append((random.randint(100, 255), random.randint(100, 255), random.randint(100, 255), 50))
 
-            for segment in segments:
-                mask = segment["mask"]
+            for i, segment in enumerate(segments):
+                mask = segment.pop("mask")
                 mask = mask.convert('L')
                 layer = Image.new('RGBA', mask.size, colors[i])
                 image.paste(layer, (0, 0), mask)
             file_name = str(uuid.uuid4())[:4]
             image.save(f"public/images/{file_name}.jpg")
 
-            result = {"path": f"{daovous_domain}/images/{file_name}.jpg"}
+            result = {
+                "path": f"{daovous_domain}/images/{file_name}.jpg",
+                "labels": [t['label'] for t in segments]
+            }
             # s3_client.upload_file(
             #     f"public/images/{file_name}.jpg", object_name=f"public/images/{file_name}.jpg"
             # )
