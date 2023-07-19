@@ -650,6 +650,8 @@ def models(model_id):
             segments = pipe(request.get_json()["img_url"])
             image = load_image(request.get_json()["img_url"])
 
+            print(segments)
+
             colors = []
             for i in range(len(segments)):
                 colors.append((random.randint(100, 255), random.randint(100, 255), random.randint(100, 255), 50))
