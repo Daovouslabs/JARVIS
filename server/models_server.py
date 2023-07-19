@@ -610,7 +610,7 @@ def models(model_id):
         # ASR
         if model_id == "openai/whisper-base" or model_id == "microsoft/speecht5_asr":
             audio_url = request.get_json()["audio_url"]
-            result = { "text": pipe(audio_url)["text"]}
+            result = { "generated text": pipe(audio_url)["text"]}
 
         # audio to audio
         if model_id == "JorisCos/DCCRNet_Libri1Mix_enhsingle_16k":

@@ -41,6 +41,6 @@ components:
     Response:
       type: object
       properties:
-        text:
+        generated text:
           type: string
 tags: []
