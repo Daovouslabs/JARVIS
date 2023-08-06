@@ -386,8 +386,14 @@ def status(model_id):
         print(f"[ check {model_id} ] failed")
         return jsonify({"loaded": False})
 
+model_limit = 2
+
 @app.route('/models/<path:model_id>', methods=['POST'])
 def models(model_id):
+    while sum(v['using'] for k, v in pipes.items()) > model_limit:
+        print(f"[model limit, inference {model_id} ] waiting")
+        time.sleep(0.1)
+
     while "using" in pipes[model_id] and pipes[model_id]["using"]:
         print(f"[ inference {model_id} ] waiting")
         time.sleep(0.1)
