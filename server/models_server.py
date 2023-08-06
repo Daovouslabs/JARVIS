@@ -390,7 +390,7 @@ model_limit = 2
 
 @app.route('/models/<path:model_id>', methods=['POST'])
 def models(model_id):
-    while sum(v['using'] for k, v in pipes.items()) > model_limit:
+    while sum([v.get('using', False) for k, v in pipes.items()]) > model_limit:
         print(f"[model limit, inference {model_id} ] waiting")
         time.sleep(0.1)
 
